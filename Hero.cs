@@ -1,9 +1,10 @@
 ﻿
 using RPGHeroes;
+using System.Runtime.CompilerServices;
 /// <summary>
 /// The base abstract Hero class to encapsulate all the shared functionality (fields and methods).
 /// </summary>
-abstract public class Hero
+abstract public class Hero : HeroAttribute
 {
     public Hero(string name)
     {
@@ -11,6 +12,9 @@ abstract public class Hero
     }
 
     public string Name;
-    public Dictionary<string, int> Level;
-    public Dictionary<string, int> LevelUpAttribute;
+    public int Level = 1;
+    public HeroAttribute HeroAttributes = new HeroAttribute();
+    public Dictionary<string, string> Equipments = new Dictionary<string, string>();
+    public List<string> ValidWeaponTypes = new List<string>();
+    public List<string> ValidArmorTypes = new List<string>();
 }
