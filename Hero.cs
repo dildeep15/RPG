@@ -17,4 +17,11 @@ abstract public class Hero : HeroAttribute
     public Dictionary<string, string> Equipments = new Dictionary<string, string>();
     public List<string> ValidWeaponTypes = new List<string>();
     public List<string> ValidArmorTypes = new List<string>();
+
+
+    /// <summary>
+    /// Method increase the level og character by 1 & corrresponding level attributes
+    /// </summary>
+    public abstract void LevelUp();
+
 }

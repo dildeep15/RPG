@@ -11,12 +11,10 @@
         {
             Console.WriteLine("Valid weaponType: "+ item);
         }
-
-        mage.UpdateHeroAttribute(mage.HeroAttributes, 1, 3, 5);
+        mage.LevelUp();
         Console.WriteLine("Strength: " + mage.HeroAttributes.strength);
         Console.WriteLine("Dexterity: " + mage.HeroAttributes.dexterity);
         Console.WriteLine("intelligence: " + mage.HeroAttributes.intelligence);
-
         Console.ReadKey();
     }
 

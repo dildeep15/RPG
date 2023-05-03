@@ -12,10 +12,26 @@ public class Mage : Hero
         :base (Name)
     {
         this.Name = Name;
-        UpdateHeroAttribute(this.HeroAttributes ,1, 1, 8);
+        DefaultHeroAttribute(this.HeroAttributes ,1, 1, 8);
         this.Equipments = Item.GetDefaultEquipments();
         this.ValidWeaponTypes.AddRange(_validWeapon);
         this.ValidArmorTypes.AddRange(_validArmor);
+    }
+
+    public override void LevelUp()
+    {
+        this.Level += Level;
+        this.HeroAttributes.strength += _levelUpAttributes[0];
+        this.HeroAttributes.dexterity += _levelUpAttributes[1];
+        this.HeroAttributes.intelligence += _levelUpAttributes[2];
+
+    }
+
+    public void DefaultHeroAttribute(HeroAttribute heroAttribute, int strength, int dexterity, int intelligence)
+    {
+        heroAttribute.strength += strength;
+        heroAttribute.dexterity += dexterity;
+        heroAttribute.intelligence += intelligence;
     }
 
 }
