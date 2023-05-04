@@ -1,10 +1,19 @@
 ﻿using RPGHeroes;
+using static Weapon;
 
 public class Armor : Item
 {
-    public Armor(string armorName)
+    public Item.slot Slot;
+    public ArmorType Type;
+    public HeroAttribute ArmorAttribute;
+
+    public Armor(string armorName, int requiredLevel, Item.slot slot, ArmorType armorType, HeroAttribute armorAttribute)
     {
         this.Name = armorName;
+        this.RequiredLevel = requiredLevel;
+        this.Slot = slot;
+        this.Type = armorType;
+        this.ArmorAttribute = armorAttribute;
     }
     public enum ArmorType
     {
@@ -13,5 +22,5 @@ public class Armor : Item
         Mail,
         Plate
     };
-    public HeroAttribute ArmorAttribute;
+ 
 }

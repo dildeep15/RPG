@@ -11,13 +11,13 @@
     };
 
 
-    public static Dictionary<string, string> GetDefaultEquipments()
+    public static Dictionary<Item.slot, string> GetDefaultEquipments()
     {
-        var equipments = new Dictionary<string, string>();
-        foreach (var item in Enum.GetNames(typeof(slot)))
-        {
-            equipments[item] = null;
-        }
+        var equipments = new Dictionary<Item.slot, string>();
+        equipments.Add(Item.slot.Weapon, null);
+        equipments.Add(Item.slot.Body, null);
+        equipments.Add(Item.slot.Head, null);
+        equipments.Add(Item.slot.Legs, null);
         return equipments;
     }
 }

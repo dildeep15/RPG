@@ -1,4 +1,5 @@
 ﻿using RPGHeroes;
+using System.Linq.Expressions;
 using System.Reflection.Metadata.Ecma335;
 
 public class Mage : Hero
@@ -36,14 +37,32 @@ public class Mage : Hero
     }
 
     /// <summary>
-    /// Method to Equip Hero with a weapon or throw exception in case of invalid weapon type
+    /// Method to Equip Hero with a weapon or throw InvalidWeaponException
     /// </summary>
     /// <param name="weapon"></param>
     public override void EquipWeapon(Weapon weapon)
     {
-
+        if (!(this.ValidWeaponTypes.Contains(weapon.Type.ToString())))
+            throw new InvalidWeaponException("The hero can't eqiup " + weapon.Type+" type weapon");
+        else if (!(this.Level >= weapon.RequiredLevel))
+            throw new InvalidWeaponException("The hero must have atleast " + weapon.RequiredLevel + " Level to aquire this armor");
+        else
+            this.Equipments[Item.slot.Weapon] = weapon.Name;
     }
 
 
+    /// <summary>
+    /// Method to equip hero with a armor or throw InvalidArmorException
+    /// </summary>
+    /// <param name="armor"></param>
+    public override void EquipArmor(Armor armor)
+    {
+        if (!(this.ValidArmorTypes.Contains(armor.Type.ToString())))
+            throw new InvalidArmorException("The hero can't eqiup "+ armor.Type +" type armor");
+        else if(!(this.Level >= armor.RequiredLevel))
+            throw new InvalidArmorException("The hero must have atleast "+ armor.RequiredLevel +" Level to aquire this armor");
+        else
+            this.Equipments[armor.Slot] = armor.Name;
+    }
 
 }
