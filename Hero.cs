@@ -23,5 +23,6 @@ abstract public class Hero : HeroAttribute
     /// Method increase the level og character by 1 & corrresponding level attributes
     /// </summary>
     public abstract void LevelUp();
+    public abstract void EquipWeapon(Weapon weapon);
 
 }

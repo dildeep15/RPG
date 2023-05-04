@@ -7,6 +7,7 @@ public class Mage : Hero
     private int[] _levelUpAttributes = {1,1,5};
     private string[] _validWeapon = { "Staff", "Wand" };
     private string[] _validArmor = { "Cloth" };
+   
 
     public Mage(string Name)
         :base (Name)
@@ -27,11 +28,22 @@ public class Mage : Hero
 
     }
 
-    public void DefaultHeroAttribute(HeroAttribute heroAttribute, int strength, int dexterity, int intelligence)
+    private void DefaultHeroAttribute(HeroAttribute heroAttribute, int strength, int dexterity, int intelligence)
     {
         heroAttribute.strength += strength;
         heroAttribute.dexterity += dexterity;
         heroAttribute.intelligence += intelligence;
     }
+
+    /// <summary>
+    /// Method to Equip Hero with a weapon or throw exception in case of invalid weapon type
+    /// </summary>
+    /// <param name="weapon"></param>
+    public override void EquipWeapon(Weapon weapon)
+    {
+
+    }
+
+
 
 }

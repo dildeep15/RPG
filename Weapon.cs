@@ -1,10 +1,8 @@
 ﻿public class Weapon : Item
-{
-    public Weapon(string weaponName)
-    {
-        // Implementation when a new Weapon is created.
-        this.Name = weaponName;
-    }
+{ 
+    public int WeaponDamage;
+    public string Slot = "Weapon";
+    public WeaponType Type;
     public enum WeaponType
     {
         Axes,
@@ -15,5 +13,14 @@
         Swords,
         Wands
     };
-    public int WeaponDamage;
+
+    public Weapon(string weaponName, int requiredLevel, WeaponType weaponType, int weaponDamage)
+    {
+        this.Name = weaponName;
+        this.RequiredLevel = requiredLevel;
+        this.Type = weaponType;
+        this.WeaponDamage = weaponDamage;
+    }
+
+ 
 }
