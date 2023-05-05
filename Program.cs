@@ -57,6 +57,8 @@ internal partial class Program
 
         Console.WriteLine("The value of total Hero damage is : "+  mage.CalculateHeroDamage());
 
+        Console.WriteLine(mage.Display());
+
     }
 
 

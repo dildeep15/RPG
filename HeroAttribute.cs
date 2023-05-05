@@ -12,10 +12,10 @@ namespace RPGHeroes
         public int strength = 0;
         public int dexterity= 0;
         public int intelligence = 0;
-        public static HeroAttribute GetHeroAttributes()
+        public static HeroAttribute getheroattributes()
         {
-            var Attributeobj = new HeroAttribute();
-            return Attributeobj;
+            var attributeobj = new HeroAttribute();
+            return attributeobj;
         }
     }
 }

@@ -1,20 +1,21 @@
 ﻿using RPGHeroes;
 using System.Linq.Expressions;
 using System.Reflection.Metadata.Ecma335;
+using System.Security.Claims;
+using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 public class Mage : Hero
 {   
-    private int[] _defaultAttributes = {1,1,8};
     private int[] _levelUpAttributes = {1,1,5};
     private string[] _validWeapon = { "Staff", "Wand" };
     private string[] _validArmor = { "Cloth" };
-   
 
     public Mage(string Name)
         :base (Name)
     {
         this.Name = Name;
-        DefaultHeroAttribute(this.HeroAttributes ,1, 1, 8);
+        this.HeroAttributes = new HeroAttribute { strength = 1, dexterity = 1, intelligence = 8 };
         this.Equipments = Item.GetDefaultEquipments();
         this.ValidWeaponTypes.AddRange(_validWeapon);
         this.ValidArmorTypes.AddRange(_validArmor);
@@ -26,14 +27,6 @@ public class Mage : Hero
         this.HeroAttributes.strength += _levelUpAttributes[0];
         this.HeroAttributes.dexterity += _levelUpAttributes[1];
         this.HeroAttributes.intelligence += _levelUpAttributes[2];
-
-    }
-
-    private void DefaultHeroAttribute(HeroAttribute heroAttribute, int strength, int dexterity, int intelligence)
-    {
-        heroAttribute.strength += strength;
-        heroAttribute.dexterity += dexterity;
-        heroAttribute.intelligence += intelligence;
     }
 
     /// <summary>
@@ -94,45 +87,43 @@ public class Mage : Hero
     }
 
 
+    /// <summary>
+    /// Method to calculate hero's damage attribute
+    /// </summary>
+    /// <returns></returns>
     public override decimal CalculateHeroDamage()
     {
-        //Hero damage = WeaponDamage * (1 + DamagingAttribute / 100)
-        int weaponDamage = 1;
+         int weaponDamage = 1;
         decimal totalDamage;
         // Check if her has a weapon or not.
         if(!(this.Equipments[Item.slot.Weapon] is null))
             weaponDamage = this.Equipments[Item.slot.Weapon].WeaponDamage;
  
             totalDamage = weaponDamage * (1 + Decimal.Divide(GetDamagingAttribute(this) , 100));
-        return totalDamage;
-
+            return totalDamage;
     }
 
-    private int GetDamagingAttribute(Hero obj)
+
+    /// <summary>
+    /// Display attributes of Hero.
+    /// </summary>
+    /// <returns></returns>
+
+    public override StringBuilder Display()
     {
-        int damagingAttribute = 0;
-        var totalAttributes = obj.TotalAttributes();
-        var typeofHero = obj.GetType().Name.ToLower();
-        switch(typeofHero)
-        {
-            case "warrior":
-                damagingAttribute = totalAttributes.strength;
-                break;
-            case "mage":
-                damagingAttribute = totalAttributes.intelligence;
-                Console.WriteLine("In right switch case: "+ totalAttributes.intelligence);
-                break;
-            case "ranger":
-                damagingAttribute = totalAttributes.dexterity;
-                break;
-            case "rogue":
-                damagingAttribute = totalAttributes.dexterity;
-                break;
-            default:
-                throw new InvalidHeroTypeException("Invalid Hero Type");
-        }
-        return damagingAttribute;
+        var totalAttributes = this.TotalAttributes();
+        var heroDamage = this.CalculateHeroDamage();
+        var stringBuilder = new StringBuilder();
+        stringBuilder.AppendLine();
+        stringBuilder.AppendLine("Name: "+ this.Name);
+        stringBuilder.AppendLine("Class: "+ this.GetType().Name);
+        stringBuilder.AppendLine("Total Strength: "+ totalAttributes.strength);
+        stringBuilder.AppendLine("Total dexterity: "+ totalAttributes.dexterity);
+        stringBuilder.AppendLine("Total Intelligence: "+ totalAttributes.intelligence);
+        stringBuilder.AppendLine("Damage: "+ heroDamage);
+        return stringBuilder;
     }
+
 
 
 }
