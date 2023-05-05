@@ -26,5 +26,6 @@ abstract public class Hero : HeroAttribute
     public abstract void EquipWeapon(Weapon weapon);
     public abstract void EquipArmor(Armor armor);
     public abstract HeroAttribute TotalAttributes();
+    public abstract decimal CalculateHeroDamage();
 
 }

@@ -69,32 +69,70 @@ public class Mage : Hero
             this.Equipments[armor.Slot].ArmorAttribute.strength = armor.ArmorAttribute.strength;
             this.Equipments[armor.Slot].ArmorAttribute.dexterity = armor.ArmorAttribute.dexterity;
             this.Equipments[armor.Slot].ArmorAttribute.intelligence = armor.ArmorAttribute.intelligence;
-
-
-            Console.WriteLine("value of armor attribute from main method:"+ armor.ArmorAttribute.strength);
-            Console.WriteLine("value stored in armor attribute from main method:"+ this.Equipments[armor.Slot].ArmorAttribute.strength);
-            //Console.WriteLine("Equip:"+ this.Equipments[armor.Slot].ArmorAttribute);
-            //this.Equipments[armor.Slot].RequiredLevel = armor.RequiredLevel;
-            //this.Equipments[armor.Slot].ArmorAttribute = armor.ArmorAttribute;
         }
     }
 
+    /// <summary>
+    /// Method calculate & return total hero attributes.
+    /// </summary>
+    /// <returns></returns>
 
     public override HeroAttribute TotalAttributes()
     {
         // Get current values of Hero Attributes
-        var totalAttributes = this.HeroAttributes;
+        var totalAttributes = new HeroAttribute();
         foreach (var (key, val) in this.Equipments)
         {
             if ((key.ToString() != "Weapon") && !(val is null))
             {
-                Console.WriteLine("val.ArmorAttribute: " + val.ArmorAttribute.strength);
-                totalAttributes.strength += val.ArmorAttribute.strength;
-                totalAttributes.dexterity += val.ArmorAttribute.dexterity;
-                totalAttributes.intelligence += val.ArmorAttribute.intelligence;
+                totalAttributes.strength = this.HeroAttributes.strength + val.ArmorAttribute.strength;
+                totalAttributes.dexterity = this.HeroAttributes.dexterity + val.ArmorAttribute.dexterity;
+                totalAttributes.intelligence = this.HeroAttributes.intelligence + val.ArmorAttribute.intelligence;
             }
         }
         return totalAttributes;
     }
+
+
+    public override decimal CalculateHeroDamage()
+    {
+        //Hero damage = WeaponDamage * (1 + DamagingAttribute / 100)
+        int weaponDamage = 1;
+        decimal totalDamage;
+        // Check if her has a weapon or not.
+        if(!(this.Equipments[Item.slot.Weapon] is null))
+            weaponDamage = this.Equipments[Item.slot.Weapon].WeaponDamage;
+ 
+            totalDamage = weaponDamage * (1 + Decimal.Divide(GetDamagingAttribute(this) , 100));
+        return totalDamage;
+
+    }
+
+    private int GetDamagingAttribute(Hero obj)
+    {
+        int damagingAttribute = 0;
+        var totalAttributes = obj.TotalAttributes();
+        var typeofHero = obj.GetType().Name.ToLower();
+        switch(typeofHero)
+        {
+            case "warrior":
+                damagingAttribute = totalAttributes.strength;
+                break;
+            case "mage":
+                damagingAttribute = totalAttributes.intelligence;
+                Console.WriteLine("In right switch case: "+ totalAttributes.intelligence);
+                break;
+            case "ranger":
+                damagingAttribute = totalAttributes.dexterity;
+                break;
+            case "rogue":
+                damagingAttribute = totalAttributes.dexterity;
+                break;
+            default:
+                throw new InvalidHeroTypeException("Invalid Hero Type");
+        }
+        return damagingAttribute;
+    }
+
 
 }

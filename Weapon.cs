@@ -1,6 +1,5 @@
 ﻿public class Weapon : Item
 { 
-    public int WeaponDamage;
     public Item.slot Slot = Item.slot.Weapon;
     public WeaponType Type;
     public enum WeaponType
