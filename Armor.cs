@@ -5,7 +5,7 @@ public class Armor : Item
 {
     public Item.slot Slot;
     public ArmorType Type;
-    public HeroAttribute ArmorAttribute;
+ 
 
     public Armor(string armorName, int requiredLevel, Item.slot slot, ArmorType armorType, HeroAttribute armorAttribute)
     {

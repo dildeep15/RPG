@@ -14,7 +14,7 @@ abstract public class Hero : HeroAttribute
     public string Name;
     public int Level = 1;
     public HeroAttribute HeroAttributes = new HeroAttribute();
-    public Dictionary<Item.slot, string> Equipments = new Dictionary<Item.slot, string>();
+    public Dictionary<Item.slot, Item> Equipments = new Dictionary<Item.slot, Item>();
     public List<string> ValidWeaponTypes = new List<string>();
     public List<string> ValidArmorTypes = new List<string>();
 
@@ -25,5 +25,6 @@ abstract public class Hero : HeroAttribute
     public abstract void LevelUp();
     public abstract void EquipWeapon(Weapon weapon);
     public abstract void EquipArmor(Armor armor);
+    public abstract HeroAttribute TotalAttributes();
 
 }

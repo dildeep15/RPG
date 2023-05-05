@@ -46,10 +46,12 @@ public class Mage : Hero
             throw new InvalidWeaponException("The hero can't eqiup " + weapon.Type+" type weapon");
         else if (!(this.Level >= weapon.RequiredLevel))
             throw new InvalidWeaponException("The hero must have atleast " + weapon.RequiredLevel + " Level to aquire this armor");
-        else
-            this.Equipments[Item.slot.Weapon] = weapon.Name;
-    }
 
+        else
+        {
+            this.Equipments[Item.slot.Weapon] = weapon;
+        }
+    }
 
     /// <summary>
     /// Method to equip hero with a armor or throw InvalidArmorException
@@ -62,7 +64,37 @@ public class Mage : Hero
         else if(!(this.Level >= armor.RequiredLevel))
             throw new InvalidArmorException("The hero must have atleast "+ armor.RequiredLevel +" Level to aquire this armor");
         else
-            this.Equipments[armor.Slot] = armor.Name;
+        {
+            this.Equipments[armor.Slot] = armor;
+            this.Equipments[armor.Slot].ArmorAttribute.strength = armor.ArmorAttribute.strength;
+            this.Equipments[armor.Slot].ArmorAttribute.dexterity = armor.ArmorAttribute.dexterity;
+            this.Equipments[armor.Slot].ArmorAttribute.intelligence = armor.ArmorAttribute.intelligence;
+
+
+            Console.WriteLine("value of armor attribute from main method:"+ armor.ArmorAttribute.strength);
+            Console.WriteLine("value stored in armor attribute from main method:"+ this.Equipments[armor.Slot].ArmorAttribute.strength);
+            //Console.WriteLine("Equip:"+ this.Equipments[armor.Slot].ArmorAttribute);
+            //this.Equipments[armor.Slot].RequiredLevel = armor.RequiredLevel;
+            //this.Equipments[armor.Slot].ArmorAttribute = armor.ArmorAttribute;
+        }
+    }
+
+
+    public override HeroAttribute TotalAttributes()
+    {
+        // Get current values of Hero Attributes
+        var totalAttributes = this.HeroAttributes;
+        foreach (var (key, val) in this.Equipments)
+        {
+            if ((key.ToString() != "Weapon") && !(val is null))
+            {
+                Console.WriteLine("val.ArmorAttribute: " + val.ArmorAttribute.strength);
+                totalAttributes.strength += val.ArmorAttribute.strength;
+                totalAttributes.dexterity += val.ArmorAttribute.dexterity;
+                totalAttributes.intelligence += val.ArmorAttribute.intelligence;
+            }
+        }
+        return totalAttributes;
     }
 
 }

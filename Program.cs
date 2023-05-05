@@ -1,9 +1,28 @@
 ﻿using RPGHeroes;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.Json.Serialization;
+
 internal partial class Program
 {
     private static void Main(string[] args)
     {
+        //var list = new List<KeyValuePair<string, int>>();
+        //list.Add(new KeyValuePair<string, int>("Cat", 1));
+        //list.Add(new KeyValuePair<string, int>("Billli", 1));
+        //list.Add(new KeyValuePair<string, int>("Kutta", 1));
+
+        //Console.WriteLine("Values of list is :"+ String.Join(":", list ));
+
+        //IDictionary<int, string> numberNames = new Dictionary<int, string>();
+        //numberNames.Add(1, "One"); //adding a key/value using the Add() method
+        //numberNames.Add(2, "Two");
+        //numberNames.Add(3, "Three");
+        //foreach (KeyValuePair<int, string> kvp in numberNames)
+        //    Console.WriteLine(kvp.Key+":"+kvp.Value);
+        //Console.WriteLine("numberNames.ToString(): "+ numberNames.ToString()) ;
+        //Console.WriteLine("Values of dictionary is :" + String.Join(":", numberNames))
+
+
         var mage = new Mage("New Mage Hero");
         Console.WriteLine("The name of mage Hero is: "+ mage.Name);
         Console.WriteLine("Strength: " + mage.HeroAttributes.strength);
@@ -14,15 +33,10 @@ internal partial class Program
             Console.WriteLine("Valid weaponType: "+ item);
         }
         mage.LevelUp();
+        Console.WriteLine("Test this "+ String.Concat(":", mage.HeroAttributes));
         Console.WriteLine("Strength: " + mage.HeroAttributes.strength);
         Console.WriteLine("Dexterity: " + mage.HeroAttributes.dexterity);
         Console.WriteLine("intelligence: " + mage.HeroAttributes.intelligence);
-
-
-
-
-
-
 
         // Create object of weapon class
         //var weaponObj = new CreateWeapon("First Axe", 1, "Axe", 2);
@@ -42,10 +56,11 @@ internal partial class Program
 
 
         Console.WriteLine("Try to equip an armor");
-        var armorattribute = new HeroAttribute();
-        armorattribute.strength = 1;
-        armorattribute.dexterity = 1;
-        armorattribute.intelligence = 1;
+        HeroAttribute armorattribute = new HeroAttribute { strength = 12, dexterity = 1, intelligence = 1 };
+        //string combinedAttributes = "strength:" + armorattribute.strength + ",";
+        //combinedAttributes += "dexterity:" + armorattribute.dexterity + ",";
+        //combinedAttributes += "intelligence:" + armorattribute.intelligence ;
+        //Console.WriteLine("combinedAttributes=" + combinedAttributes);
 
         var armor1 = new Armor("Common Cloth Chest", 1, Item.slot.Body, Armor.ArmorType.Cloth, armorattribute);
         Console.WriteLine("Armor Name: " +armor1.Name);
@@ -53,13 +68,10 @@ internal partial class Program
         Console.WriteLine("Armor Type: " +armor1.Type);
         mage.EquipArmor(armor1);
 
-        foreach (var val in mage.Equipments)
-        { 
-            Console.WriteLine("Value of Equipments: "+val);
-        }
-
-
-
+        var herototalAttributes  = mage.TotalAttributes();
+        Console.WriteLine("Strength: " + herototalAttributes.strength);
+        Console.WriteLine("Dexterity: " + herototalAttributes.dexterity);
+        Console.WriteLine("intelligence: " + herototalAttributes.intelligence);
         Console.ReadKey();
     }
 
