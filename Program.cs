@@ -1,4 +1,4 @@
-﻿using RPGHeroes;
+﻿using RPGHeroes.Attributes;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
@@ -35,9 +35,7 @@ internal partial class Program
         Console.WriteLine("Name: " + weapon2.Name);
         Console.WriteLine("Required Level: " + weapon2.RequiredLevel);
         Console.WriteLine("Type: " + weapon2.Type);
-
         Console.WriteLine("Try to equip a weapon");
-
         mage.EquipWeapon(weapon2);
 
 
@@ -48,7 +46,7 @@ internal partial class Program
         Console.WriteLine("Armor Name: " +armor1.Name);
         Console.WriteLine("Armor Slot: " +armor1.Slot);
         Console.WriteLine("Armor Type: " +armor1.Type);
-        mage.EquipArmor(armor1);
+        //mage.EquipArmor(armor1);
 
         var herototalAttributes  = mage.TotalAttributes();
         Console.WriteLine("Total Strength: " + herototalAttributes.strength);
@@ -56,7 +54,6 @@ internal partial class Program
         Console.WriteLine("Total intelligence: " + herototalAttributes.intelligence);
 
         Console.WriteLine("The value of total Hero damage is : "+  mage.CalculateHeroDamage());
-
         Console.WriteLine(mage.Display());
 
     }

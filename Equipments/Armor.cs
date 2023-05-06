@@ -1,4 +1,4 @@
-﻿using RPGHeroes;
+﻿using RPGHeroes.Attributes;
 using static Weapon;
 
 public class Armor : Item

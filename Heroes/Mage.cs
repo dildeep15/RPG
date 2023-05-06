@@ -1,4 +1,4 @@
-﻿using RPGHeroes;
+﻿using RPGHeroes.Attributes;
 using System.Linq.Expressions;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
@@ -74,6 +74,11 @@ public class Mage : Hero
     {
         // Get current values of Hero Attributes
         var totalAttributes = new HeroAttribute();
+        totalAttributes.strength = this.HeroAttributes.strength;
+        totalAttributes.dexterity = this.HeroAttributes.dexterity;
+        totalAttributes.intelligence = this.HeroAttributes.intelligence;
+
+        // Update HeroAttributes with values from Equipments
         foreach (var (key, val) in this.Equipments)
         {
             if ((key.ToString() != "Weapon") && !(val is null))

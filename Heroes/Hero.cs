@@ -1,5 +1,4 @@
-﻿
-using RPGHeroes;
+﻿using RPGHeroes.Attributes;
 using System.Runtime.CompilerServices;
 using System.Text;
 /// <summary>

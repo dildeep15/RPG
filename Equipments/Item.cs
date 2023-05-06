@@ -1,4 +1,4 @@
-﻿using RPGHeroes;
+﻿using RPGHeroes.Attributes;
 
 public abstract class Item
 {
