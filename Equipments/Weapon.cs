@@ -1,7 +1,12 @@
-﻿public class Weapon : Item
+﻿namespace RPGHeroes.Equipments;
+public class Weapon : Item
 { 
-    public Item.slot Slot = Item.slot.Weapon;
+    public Item.Slot Slot = Item.Slot.Weapon;
     public WeaponType Type;
+
+    /// <summary>
+    /// Enumerator containing list of weapon types
+    /// </summary>
     public enum WeaponType
     {
         Axe,

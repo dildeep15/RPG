@@ -1,61 +1,48 @@
-﻿using RPGHeroes.Attributes;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Json.Serialization;
+using RPGHeroes;
+using RPGHeroes.Attributes;
+using RPGHeroes.Equipments;
+using static System.Net.Mime.MediaTypeNames;
 
 internal partial class Program
 {
     private static void Main(string[] args)
     {
 
-        var mage = new Mage("New Mage Hero");
-        Console.WriteLine("The name of mage Hero is: "+ mage.Name);
-        Console.WriteLine("Strength: " + mage.HeroAttributes.strength);
-        Console.WriteLine("Dexterity: " + mage.HeroAttributes.dexterity);
-        Console.WriteLine("intelligence: " + mage.HeroAttributes.intelligence);
-        foreach (var item in mage.ValidWeaponTypes)
-        {
-            Console.WriteLine("Valid weaponType: "+ item);
-        }
-        Console.WriteLine("--------------------------------------");
-        mage.LevelUp();
-        Console.WriteLine("Strength (After level up): " + mage.HeroAttributes.strength);
-        Console.WriteLine("Dexterity (After level up): " + mage.HeroAttributes.dexterity);
-        Console.WriteLine("intelligence (After level up): " + mage.HeroAttributes.intelligence);
+        // Creata new hero of type Mage.
+        var heroType = Hero.HeroTypes.Mage;
+        Console.WriteLine("The value of herotype is: " + heroType);
+        var mageHero = new Mage("Mage Hero", heroType);
+        Console.WriteLine(mageHero.Display());
 
+        // Level Up code;
+        mageHero.LevelUp();
+        Console.WriteLine("Update informationa after level up");
+        Console.WriteLine(mageHero.Display());
 
-        //var weapon1 = new Weapon("First Axe", 1, Weapon.WeaponType.Axe, 2);
-        //Console.WriteLine("Name: "+ weapon1.Name);
-        //Console.WriteLine("Required Level: "+ weapon1.RequiredLevel);
-        //Console.WriteLine("Type: "+ weapon1.Type);
-        //mage.EquipWeapon(weapon1);
+        // Equip a Weapon;
+        var weaponStaff = new Weapon("Staff Weapon", 2, Weapon.WeaponType.Staff, 2);
+        Console.WriteLine("Name: "+ weaponStaff.Name);
+        Console.WriteLine("Required Level: "+ weaponStaff.RequiredLevel);
+        Console.WriteLine("Type: "+ weaponStaff.Type);
+        mageHero.EquipWeapon(weaponStaff);
+        Console.WriteLine("Information after weapon equipment");
+        Console.WriteLine(mageHero.Display());
 
-        var weapon2 = new Weapon("Staff", 1, Weapon.WeaponType.Staff, 2);
-        Console.WriteLine("Name: " + weapon2.Name);
-        Console.WriteLine("Required Level: " + weapon2.RequiredLevel);
-        Console.WriteLine("Type: " + weapon2.Type);
-        Console.WriteLine("Try to equip a weapon");
-        mage.EquipWeapon(weapon2);
-
-
+        // Equip an Armor
         Console.WriteLine("Try to equip an armor");
-        HeroAttribute armorattribute = new HeroAttribute { strength = 12, dexterity = 1, intelligence = 1 };
+        LevelAttribute armorattribute = new LevelAttribute { Strength = 12, Dexterity = 1, Intelligence = 1 };
 
-        var armor1 = new Armor("Common Cloth Chest", 1, Item.slot.Body, Armor.ArmorType.Cloth, armorattribute);
-        Console.WriteLine("Armor Name: " +armor1.Name);
-        Console.WriteLine("Armor Slot: " +armor1.Slot);
-        Console.WriteLine("Armor Type: " +armor1.Type);
-        //mage.EquipArmor(armor1);
-
-        var herototalAttributes  = mage.TotalAttributes();
-        Console.WriteLine("Total Strength: " + herototalAttributes.strength);
-        Console.WriteLine("Total Dexterity: " + herototalAttributes.dexterity);
-        Console.WriteLine("Total intelligence: " + herototalAttributes.intelligence);
-
-        Console.WriteLine("The value of total Hero damage is : "+  mage.CalculateHeroDamage());
-        Console.WriteLine(mage.Display());
-
+        var armor1 = new Armor("Common Cloth Chest", 1, Item.Slot.Body, Armor.ArmorType.Cloth, armorattribute);
+        Console.WriteLine("Armor Name: " + armor1.Name);
+        Console.WriteLine("Armor Slot: " + armor1.Slot);
+        Console.WriteLine("Armor Type: " + armor1.Type);
+        mageHero.EquipArmor(armor1);
+        Console.WriteLine("Information after aquiring an armor");
+        Console.WriteLine(mageHero.Display());
     }
 
 

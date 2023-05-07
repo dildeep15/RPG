@@ -1,13 +1,18 @@
-﻿using RPGHeroes.Attributes;
+﻿using RPGHeroes;
+using RPGHeroes.Attributes;
 
+namespace RPGHeroes.Equipments;
 public abstract class Item
 {
-    public string Name;
+    public string? Name;
     public int RequiredLevel;
     public int WeaponDamage;
-    public HeroAttribute ArmorAttribute;
+    public LevelAttribute ArmorAttribute;
 
-    public enum slot
+    /// <summary>
+    /// Enumerator listing items to be equiped by hero
+    /// </summary>
+    public enum Slot
     {
         Weapon,
         Head,
@@ -15,14 +20,17 @@ public abstract class Item
         Legs
     };
 
-
-    public static Dictionary<Item.slot, Item> GetDefaultEquipments()
+    /// <summary>
+    /// <c>GetDefaultEquipments</c> method initialize Equipment with null/default value.
+    /// </summary>
+    /// <returns>Return list of equipments</returns>
+    public  Dictionary<Item.Slot, Item?> GetDefaultEquipments()
     {
-        var equipments = new Dictionary<Item.slot, Item>();
-        equipments.Add(Item.slot.Weapon, default);
-        equipments.Add(Item.slot.Body, default);
-        equipments.Add(Item.slot.Head, default);
-        equipments.Add(Item.slot.Legs, default);
+        var equipments = new Dictionary<Item.Slot, Item?>();
+        equipments.Add(Item.Slot.Weapon, null);
+        equipments.Add(Item.Slot.Body, null);
+        equipments.Add(Item.Slot.Head, null);
+        equipments.Add(Item.Slot.Legs, null);
         return equipments;
     }
 }
