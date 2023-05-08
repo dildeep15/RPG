@@ -1,20 +1,13 @@
 ﻿using RPGHeroes;
 using RPGHeroes.Attributes;
 using RPGHeroes.Equipments;
-using System.Linq.Expressions;
-using System.Reflection.Metadata.Ecma335;
-using System.Security.Claims;
-using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
 public class Mage : Hero
 {   
-    private int[] _levelUpAttributes = {1,1,5};
-
-    public Mage(string name, HeroTypes heroType)
-        :base (name, heroType)
+    public Mage(string name)
+        :base (name, HeroTypes.Mage)
     {
-        this.Name = Name;
+        this.Name = name;
         // Default hero attributes.
         this.HeroAttributes = new LevelAttribute (1, 1,8 );
         // Allowed weapon types for hero

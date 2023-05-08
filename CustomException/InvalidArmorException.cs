@@ -5,6 +5,4 @@ public class InvalidArmorException : Exception
         :base (message)
     {
     }
-
-
 }

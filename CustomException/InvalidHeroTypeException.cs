@@ -4,6 +4,4 @@
         :base (message)
     {
     }
-
-
 }

@@ -1,12 +1,11 @@
-﻿using RPGHeroes;
-using RPGHeroes.Attributes;
+﻿using RPGHeroes.Attributes;
 
 namespace RPGHeroes.Equipments;
 public abstract class Item
 {
     public string? Name;
     public int RequiredLevel;
-    public int WeaponDamage;
+    public decimal WeaponDamage;
     public LevelAttribute ArmorAttribute;
 
     /// <summary>

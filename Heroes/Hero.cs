@@ -1,6 +1,4 @@
-﻿using RPGHeroes;
-using System.Runtime.CompilerServices;
-using System.Text;
+﻿using System.Text;
 using RPGHeroes.Attributes;
 using RPGHeroes.Equipments;
 
@@ -48,7 +46,7 @@ abstract public class Hero : LevelAttribute
     public void LevelUp()
     {
         // Increase level of hero by 1.
-        this.Level += Level;
+        this.Level++;
         AddAttributes(this.HeroAttributes, this.LevelUpAttributes);
     }
 
@@ -104,13 +102,13 @@ abstract public class Hero : LevelAttribute
     /// <returns>Return weapon damage of hero in <c>decimal</c></returns>
     public decimal CalculateHeroDamage()
     {
-        int weaponDamage = 1;
+        decimal weaponDamage = 1;
         decimal totalDamage;
         // Check if hero has a weapon or not.
         if (this.Equipments[Item.Slot.Weapon] is not null)
-            weaponDamage = this.Equipments[Item.Slot.Weapon].WeaponDamage;
+            weaponDamage = this.Equipments[Item.Slot.Weapon]!.WeaponDamage;
 
-        totalDamage = weaponDamage * (1 + Decimal.Divide(GetDamagingAttribute(), 100));
+        totalDamage = weaponDamage * (1 + (decimal)GetDamagingAttribute()/100);
         return totalDamage;
     }
 
@@ -127,9 +125,6 @@ abstract public class Hero : LevelAttribute
         else
         {
             this.Equipments[armor.Slot] = armor;
-            //this.Equipments[armor.Slot].ArmorAttribute.Strength = armor.ArmorAttribute.Strength;
-            //this.Equipments[armor.Slot].ArmorAttribute.Dexterity = armor.ArmorAttribute.Dexterity;
-            //this.Equipments[armor.Slot].ArmorAttribute.Intelligence = armor.ArmorAttribute.Intelligence;
         }
     }
 
@@ -163,7 +158,7 @@ abstract public class Hero : LevelAttribute
     {
         int damagingAttribute = 0;
         var totalAttributes = this.TotalAttributes();
-        var typeofHero = this.TypeOfHero.ToString().ToLower();
+        var typeofHero = this.HeroType.ToString().ToLower();
         switch (typeofHero)
         {
             case "warrior":

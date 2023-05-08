@@ -18,7 +18,7 @@ public class Weapon : Item
         Wand
     };
 
-    public Weapon(string weaponName, int requiredLevel, WeaponType weaponType, int weaponDamage)
+    public Weapon(string weaponName, int requiredLevel, WeaponType weaponType, decimal weaponDamage)
     {
         this.Name = weaponName;
         this.RequiredLevel = requiredLevel;
