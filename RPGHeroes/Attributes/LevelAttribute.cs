@@ -4,10 +4,10 @@ namespace RPGHeroes.Attributes
 {
     public class LevelAttribute
     {
-        public int Strength;
-        public int Dexterity;
-        public int Intelligence;
-        public HeroTypes TypeOfHero;
+        public int Strength { get; set; }
+        public int Dexterity { get; set; }
+        public int Intelligence { get; set; }
+        public HeroTypes TypeOfHero { get; set; }
 
 
         public LevelAttribute( int strength = 0, int dexterity = 0, int intelligence = 0 )
