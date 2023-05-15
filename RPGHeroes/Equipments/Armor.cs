@@ -4,9 +4,9 @@ using RPGHeroes.Attributes;
 namespace RPGHeroes.Equipments;
 public class Armor : Item
 {
-    public Item.Slot Slot;
-    public ArmorType Type;
- 
+    public Item.Slot Slot { get; set; }
+    public ArmorType Type { get; set; }
+
     public Armor(string armorName, int requiredLevel, Item.Slot slot, ArmorType armorType, LevelAttribute armorAttribute)
     {
         this.Name = armorName;
